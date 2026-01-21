@@ -153,7 +153,7 @@ python pipe_highlight/pipe_highlight_test.py \
 
 ---
 
-## Use Case Example
+## My Use Case
 
 ### Video Processing Workflow
 
