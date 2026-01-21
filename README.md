@@ -7,7 +7,6 @@ This repository contains Python scripts for processing video files, particularly
 The codebase includes tools for:
 - Splitting large video files into smaller chunks
 - Extracting frames from videos for training datasets
-- Detecting and highlighting pipes in video footage
 
 ## Requirements
 
@@ -111,48 +110,6 @@ Example: `frame_000001_00_01_23_456.jpg`
 
 ---
 
-### 3. `pipe_highlight/pipe_highlight_test.py`
-
-Detects pipes in video footage and overlays a green highlight mask on detected pipe regions. Uses computer vision techniques including CLAHE enhancement, Canny edge detection, and contour analysis.
-
-#### Usage
-
-```bash
-python pipe_highlight/pipe_highlight_test.py --in <input_video> [options]
-```
-
-#### Arguments
-
-- `--in` (required): Input video file path
-- `--out` (optional): Output video file path (default: `input_name_pipe_highlight.mp4`)
-- `--show` (optional): Display playback window during processing
-- `--scale` (optional): Resize factor for faster processing (default: `1.0`)
-- `--canny1` (optional): Canny edge detection threshold 1 (default: `60`)
-- `--canny2` (optional): Canny edge detection threshold 2 (default: `160`)
-
-#### Example
-
-```bash
-python pipe_highlight/pipe_highlight_test.py \
-    --in ../data/original/LTsealine.mp4 \
-    --out output_highlighted.mp4 \
-    --show
-```
-
-#### How It Works
-
-1. **Preprocessing**: Applies CLAHE (Contrast Limited Adaptive Histogram Equalization) to enhance contrast
-2. **Edge Detection**: Uses Canny edge detection to find edges
-3. **Morphological Operations**: Closes gaps and dilates edges to form coherent contours
-4. **Pipe Detection**: Scores contours based on:
-   - Area (prefers larger regions)
-   - Aspect ratio (prefers elongated shapes)
-   - Border proximity (penalizes edge-hugging contours)
-5. **Temporal Smoothing**: Uses exponential moving average to reduce jitter across frames
-6. **Visualization**: Overlays green highlight mask and draws bounding box outline
-
----
-
 ## My Use Case
 
 ### Video Processing Workflow
@@ -202,16 +159,6 @@ python preprocessing/extract_frames.py \
 
 ![Extract Images](docs/image-2.png)
 
-#### Step 3: Process Individual Videos (Optional)
-
-If needed, apply pipe detection and highlighting to specific video chunks:
-
-```bash
-python pipe_highlight/pipe_highlight_test.py \
-    --in out_parts/LTsealine/part_0001.mp4 \
-    --out highlighted_part_0001.mp4
-```
-
 ---
 
 ## Project Structure
@@ -226,8 +173,6 @@ erasmus-thesis/
 │   ├── split_videos.py    # Video splitting script
 │   ├── extract_frames.py  # Frame extraction script
 │   └── short_videos/      # Output directory for split videos
-├── pipe_highlight/
-│   └── pipe_highlight_test.py  # Pipe detection and highlighting
 └── README.md              # This file
 ```
 
@@ -248,13 +193,6 @@ erasmus-thesis/
 - Timestamps are calculated from video decode position
 - Supports resizing for memory efficiency
 - Handles videos with unknown frame counts gracefully
-
-### Pipe Detection (`pipe_highlight_test.py`)
-
-- Implements temporal smoothing to reduce detection jitter
-- Falls back to recent detections when pipe is temporarily occluded
-- Configurable edge detection thresholds for different video conditions
-- Mask expansion only affects the minor axis (pipe thickness) for accurate highlighting
 
 ---
 
