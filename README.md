@@ -475,18 +475,14 @@ erasmus-thesis/
 
 ---
 
-## Troubleshooting
+## Progress
 
-### FFmpeg Not Found
-If you get "ffmpeg: command not found", ensure FFmpeg is installed and in your system PATH.
-
-### Empty Video Chunks
-If video chunks are empty or corrupted, ensure you're using the latest version of `split_videos.py` which uses accurate seeking.
-
-### Memory Issues
-For very large videos, use the `--scale` parameter to reduce resolution during processing.
-
----
+![alt text](<docs/Screenshot from 2026-01-26 05-46-18.png>)
+![alt text](<docs/Screenshot from 2026-01-26 05-55-18.png>)
+![alt text](<docs/Screenshot from 2026-01-27 09-33-13-1.png>)
+![alt text](<docs/Screenshot from 2026-01-27 10-02-13.png>)
+![alt text](<docs/Screenshot from 2026-01-27 09-33-13.png>)
+![alt text](<docs/Screenshot from 2026-01-27 10-19-11.png>)
 
 ## License
 
